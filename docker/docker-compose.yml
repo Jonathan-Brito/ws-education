@@ -11,6 +11,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 420024Jo
       MYSQL_DATABASE: BRITO
-      MYSQL_USER: education
-      MYSQL_PASSWORD: 420024Jo
+      MYSQL_USER:
+      MYSQL_PASSWORD:
 
