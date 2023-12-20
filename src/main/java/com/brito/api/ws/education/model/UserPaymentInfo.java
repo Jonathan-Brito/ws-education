@@ -1,2 +1,42 @@
-package com.brito.api.ws.education.model;public class UserPaymentInfo {
+package com.brito.api.ws.education.model;
+
+import jakarta.persistence.*;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
+@Entity
+@Table(name = "user_payment_info")
+public class UserPaymentInfo implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_payment_info_id")
+    private Long id;
+
+    @Column(name = "card_number")
+    private String cardNumber;
+
+    @Column(name = "card_expiration_month")
+    private Long cardExpirationMonth;
+
+    @Column(name = "card_expiration_year")
+    private Long cardExpirationYear;
+
+    @Column(name = "card_security_code")
+    private String cardSecurityCode;
+
+    @Column(name = "price")
+    private BigDecimal price;
+
+    @Column(name = "instalments")
+    private Long instalments;
+
+    @Column(name = "dt_payment")
+    private LocalDate dtPayment;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 }
