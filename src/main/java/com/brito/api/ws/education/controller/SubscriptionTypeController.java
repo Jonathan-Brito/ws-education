@@ -6,10 +6,7 @@ import com.brito.api.ws.education.service.SubscriptionTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -27,11 +24,14 @@ public class SubscriptionTypeController {
 
     @GetMapping("/{id}")
     public ResponseEntity<SubscriptionType> findbyId(@PathVariable("id") Long id){
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(subscriptionTypeService.findById(id));
-        } catch (NotFoundException e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
-
+        return ResponseEntity.status(HttpStatus.OK).body(subscriptionTypeService.findById(id));
     }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<String> notfoundException(NotFoundException e){
+        String errorMessage = e.getMessage();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
+    }
+
+
 }
