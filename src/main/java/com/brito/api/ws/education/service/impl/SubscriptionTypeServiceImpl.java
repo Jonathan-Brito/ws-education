@@ -1,5 +1,6 @@
 package com.brito.api.ws.education.service.impl;
 
+import com.brito.api.ws.education.dto.SubscriptionTypeDto;
 import com.brito.api.ws.education.exception.NotFoundException;
 import com.brito.api.ws.education.model.SubscriptionType;
 import com.brito.api.ws.education.repository.SubscriptionTypeRepository;
@@ -32,8 +33,14 @@ public class SubscriptionTypeServiceImpl implements SubscriptionTypeService {
     }
 
     @Override
-    public SubscriptionType create(SubscriptionType subscriptionType) {
-        return null;
+    public SubscriptionType create(SubscriptionTypeDto subscriptionTypeDto) {
+        return subscriptionTypeRepository.save(SubscriptionType.builder()
+                        .id(subscriptionTypeDto.getId())
+                        .name(subscriptionTypeDto.getName())
+                        .accessMonths(subscriptionTypeDto.getAccessMonths())
+                        .price(subscriptionTypeDto.getPrice())
+                        .productKey(subscriptionTypeDto.getProductKey())
+                .build());
     }
 
     @Override

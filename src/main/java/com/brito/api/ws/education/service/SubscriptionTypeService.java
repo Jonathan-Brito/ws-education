@@ -1,5 +1,6 @@
 package com.brito.api.ws.education.service;
 
+import com.brito.api.ws.education.dto.SubscriptionTypeDto;
 import com.brito.api.ws.education.model.SubscriptionType;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ public interface SubscriptionTypeService {
 
     SubscriptionType findById(Long id);
 
-    SubscriptionType create(SubscriptionType subscriptionType);
+    SubscriptionType create(SubscriptionTypeDto subscriptionTypeDto);
 
     SubscriptionType update(Long id, SubscriptionType subscriptionType);
 
