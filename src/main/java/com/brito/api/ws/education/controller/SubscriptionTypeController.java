@@ -22,13 +22,18 @@ public class SubscriptionTypeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SubscriptionType> findbyId(@PathVariable("id") Long id) {
+    public ResponseEntity<SubscriptionType> findById(@PathVariable("id") Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(subscriptionTypeService.findById(id));
     }
 
     @PostMapping
     public ResponseEntity<SubscriptionType> create(@RequestBody SubscriptionTypeDto subscriptionTypeDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(subscriptionTypeService.create(subscriptionTypeDto));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<SubscriptionType> update(@PathVariable("id") Long id, @RequestBody SubscriptionTypeDto subscriptionTypeDto){
+        return ResponseEntity.status(HttpStatus.OK).body(subscriptionTypeService.update(id, subscriptionTypeDto));
     }
 
 
