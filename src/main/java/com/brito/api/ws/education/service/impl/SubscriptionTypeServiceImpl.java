@@ -3,6 +3,7 @@ package com.brito.api.ws.education.service.impl;
 import com.brito.api.ws.education.dto.SubscriptionTypeDto;
 import com.brito.api.ws.education.exception.BadRequestException;
 import com.brito.api.ws.education.exception.NotFoundException;
+import com.brito.api.ws.education.mapper.SubscriptionTypeMapper;
 import com.brito.api.ws.education.model.SubscriptionType;
 import com.brito.api.ws.education.repository.SubscriptionTypeRepository;
 import com.brito.api.ws.education.service.SubscriptionTypeService;
@@ -36,25 +37,15 @@ public class SubscriptionTypeServiceImpl implements SubscriptionTypeService {
             throw new BadRequestException("Id deve ser nulo");
         }
 
-        return subscriptionTypeRepository.save(SubscriptionType.builder()
-                        .id(subscriptionTypeDto.getId())
-                        .name(subscriptionTypeDto.getName())
-                        .accessMonths(subscriptionTypeDto.getAccessMonths())
-                        .price(subscriptionTypeDto.getPrice())
-                        .productKey(subscriptionTypeDto.getProductKey())
-                .build());
+        return subscriptionTypeRepository.save(SubscriptionTypeMapper.fromDtoToEntity(subscriptionTypeDto));
     }
 
     @Override
     public SubscriptionType update(Long id, SubscriptionTypeDto subscriptionTypeDto) {
         getSubscriptionType(id);
-        return subscriptionTypeRepository.save(SubscriptionType.builder()
-                .id(id)
-                .name(subscriptionTypeDto.getName())
-                .accessMonths(subscriptionTypeDto.getAccessMonths())
-                .price(subscriptionTypeDto.getPrice())
-                .productKey(subscriptionTypeDto.getProductKey())
-                .build());
+        subscriptionTypeDto.setId(id);
+        return subscriptionTypeRepository.save(SubscriptionTypeMapper.fromDtoToEntity(subscriptionTypeDto));
+
     }
 
     @Override
