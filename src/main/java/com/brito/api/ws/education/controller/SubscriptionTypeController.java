@@ -3,6 +3,7 @@ package com.brito.api.ws.education.controller;
 import com.brito.api.ws.education.dto.SubscriptionTypeDto;
 import com.brito.api.ws.education.model.SubscriptionType;
 import com.brito.api.ws.education.service.SubscriptionTypeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,7 @@ public class SubscriptionTypeController {
     }
 
     @PostMapping
-    public ResponseEntity<SubscriptionType> create(@RequestBody SubscriptionTypeDto subscriptionTypeDto){
+    public ResponseEntity<SubscriptionType> create(@Valid @RequestBody SubscriptionTypeDto subscriptionTypeDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(subscriptionTypeService.create(subscriptionTypeDto));
     }
 
