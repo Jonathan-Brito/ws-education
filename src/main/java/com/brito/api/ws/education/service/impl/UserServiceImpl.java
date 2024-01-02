@@ -21,8 +21,8 @@ public class UserServiceImpl implements UserService {
     private final UserTypeRepository userTypeRepository;
 
     public UserServiceImpl(final UserRepository userRepository, final UserTypeRepository userTypeRepository){
-        this.userRepository = Objects.requireNonNull(userRepository);
-        this.userTypeRepository = Objects.requireNonNull(userTypeRepository);
+        this.userRepository = userRepository;
+        this.userTypeRepository = userTypeRepository;
     }
     @Override
     public User create(UserDto userDto) {

@@ -3,6 +3,7 @@ package com.brito.api.ws.education.exception.handler;
 import com.brito.api.ws.education.dto.error.ErrorResponseDto;
 import com.brito.api.ws.education.exception.BadRequestException;
 import com.brito.api.ws.education.exception.NotFoundException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -48,6 +49,15 @@ public class ResourceHandler {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ErrorResponseDto.builder()
                 .message(Arrays.toString(messages.entrySet().toArray()))
+                .httpStatus(HttpStatus.BAD_REQUEST)
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .build());
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ErrorResponseDto> badRequestException(DataIntegrityViolationException d){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ErrorResponseDto.builder()
+                .message(d.getMessage())
                 .httpStatus(HttpStatus.BAD_REQUEST)
                 .statusCode(HttpStatus.BAD_REQUEST.value())
                 .build());
